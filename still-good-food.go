@@ -26,7 +26,7 @@ type Recipe struct {
 	Steps       []string
 	Yield       string
 	Difficulty  string
-	Preperation string
+	Preparation string
 	Cook        string
 	Nutrition   NutritionInfo
 }
@@ -54,10 +54,10 @@ func Scrape(recipe string) (Recipe, error) {
 
 	difficulty := strings.TrimSpace(doc.Find("section.recipe-details__item--skill-level").Text())
 
-	preperationSpan := doc.Find(".recipe-details__cooking-time-prep")
-	preperationSpan.Find("strong").Remove()
+	preparationSpan := doc.Find(".recipe-details__cooking-time-prep")
+	preparationSpan.Find("strong").Remove()
 
-	preperation := strings.TrimSpace(preperationSpan.Text())
+	preparation := strings.TrimSpace(preparationSpan.Text())
 
 	cookSpan := doc.Find(".recipe-details__cooking-time-cook")
 	cookSpan.Find("strong").Remove()
@@ -80,7 +80,7 @@ func Scrape(recipe string) (Recipe, error) {
 		Steps:       steps,
 		Yield:       yield,
 		Difficulty:  difficulty,
-		Preperation: preperation,
+		Preparation: preparation,
 		Cook:        cook,
 		Nutrition:   nutrition,
 	}
