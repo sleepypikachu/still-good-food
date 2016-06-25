@@ -3,7 +3,7 @@ package main
 import (
 	"encoding/json"
 	"fmt"
-	"github.com/sleepypikachu/food"
+	"github.com/sleepypikachu/still-good-food/food"
 	"os"
 )
 
