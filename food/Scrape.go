@@ -1,12 +1,9 @@
-package main
+package food
 
 import (
-	"encoding/json"
 	"fmt"
-	"os"
-	"strings"
-
 	"github.com/PuerkitoBio/goquery"
+	"strings"
 )
 
 type NutritionInfo struct {
@@ -87,26 +84,6 @@ func Scrape(recipe string) (Recipe, error) {
 
 	return r, nil
 }
-
 func extract(itemprop string, doc *goquery.Document) string {
 	return strings.TrimSpace(doc.Find(fmt.Sprintf("span[itemprop='%s']", itemprop)).Text())
-}
-
-func main() {
-	if len(os.Args) != 2 {
-		fmt.Fprintf(os.Stderr, "usage: %s <url>\n", os.Args[0])
-		return
-	}
-
-	r, err := Scrape(os.Args[1])
-	if err != nil {
-		panic(err)
-	}
-
-	b, err := json.Marshal(r)
-	if err != nil {
-		panic(err)
-	}
-
-	fmt.Printf("%s", b)
 }
